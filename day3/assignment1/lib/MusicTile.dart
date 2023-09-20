@@ -19,13 +19,14 @@ class MusicTile extends StatelessWidget {
     return ListTile(
       leading: ClipRRect(
           borderRadius: BorderRadius.circular(6), child: Image.asset(imgUrl)),
-      title: Text(
-        name,
-        overflow: TextOverflow.visible,
-        maxLines: 2,
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 18,
+      title: Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Text(
+          name,
+          overflow: TextOverflow.visible,
+          maxLines: 2,
+          style: TextStyle(
+              color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
         ),
       ),
       subtitle: Padding(
@@ -36,6 +37,7 @@ class MusicTile extends StatelessWidget {
             Icon(
               Icons.check_circle,
               color: Colors.white,
+              size: 20,
             ),
             Padding(
               padding: const EdgeInsets.all(4.0),
