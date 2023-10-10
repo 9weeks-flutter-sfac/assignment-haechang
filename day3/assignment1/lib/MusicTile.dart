@@ -29,42 +29,30 @@ class MusicTile extends StatelessWidget {
               color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
         ),
       ),
-      subtitle: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 1.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Icon(
-              Icons.check_circle,
-              color: Colors.white,
-              size: 20,
+      subtitle: Row(
+        children: [
+          Icon(Icons.check_circle, size: 18),
+          SizedBox(
+            width: 4,
+          ),
+          Flexible(
+            child: Text(
+              singer,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Row(
-                children: [
-                  Container(
-                    constraints: BoxConstraints(maxWidth: 200),
-                    child: Text(
-                      singer,
-                      maxLines: 1,
-                      style: TextStyle(
-                          overflow: TextOverflow.ellipsis, color: Colors.white),
-                    ),
-                  ),
-                  Text(
-                    ' · ',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                  Text(
-                    playTime,
-                    style: TextStyle(color: Colors.white),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+          SizedBox(
+            width: 4,
+          ),
+          Text(' · '),
+          SizedBox(
+            width: 4,
+          ),
+          Text(
+            playTime,
+          ),
+        ],
       ),
       trailing: Icon(
         Icons.more_vert,

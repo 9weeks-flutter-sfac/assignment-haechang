@@ -97,16 +97,11 @@ class MyApp extends StatelessWidget {
                   child: Center(
                     child: Row(
                       children: [
-                        Container(
-                          width: 70,
-                          alignment: Alignment.centerLeft,
-                          child: Icon(
-                            Icons.account_circle,
-                            size: 50,
-                          ),
+                        Icon(
+                          Icons.account_circle,
+                          size: 50,
                         ),
                         Container(
-                          width: 290,
                           alignment: Alignment.centerLeft,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,6 +129,7 @@ class MyApp extends StatelessWidget {
                             ],
                           ),
                         ),
+                        Spacer(),
                         Container(
                           alignment: Alignment.centerRight,
                           child: Icon(

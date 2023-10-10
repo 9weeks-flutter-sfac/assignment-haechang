@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
             '아워리스트',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
+          centerTitle: false,
           actions: [
             Padding(
               padding: const EdgeInsets.all(8.0),

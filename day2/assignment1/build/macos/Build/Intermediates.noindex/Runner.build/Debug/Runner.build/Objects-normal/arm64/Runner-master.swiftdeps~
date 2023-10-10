@@ -1,0 +1,8 @@
+version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
+options: "18ba80b597865a0a580bb38f842cbd1e0e91aca1c881c8c23a71ab566cd1e043"
+build_start_time: [1695104359, 404925000]
+build_end_time: [1695104359, 460188000]
+inputs:
+  "/Users/rohhaechang/Desktop/project/assignment-haechang/day2/assignment1/macos/Flutter/GeneratedPluginRegistrant.swift": !private [1695104340, 679847260]
+  "/Users/rohhaechang/Desktop/project/assignment-haechang/day2/assignment1/macos/Runner/AppDelegate.swift": !private [1694576880, 0]
+  "/Users/rohhaechang/Desktop/project/assignment-haechang/day2/assignment1/macos/Runner/MainFlutterWindow.swift": !private [1694576880, 0]

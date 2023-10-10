@@ -105,3 +105,18 @@ class _FoodListState extends State<FoodList> {
     );
   }
 }
+
+
+/**
+ *
+ * ItemCount를 지정하지 않으면, 무한대로 생성하게 된다.
+ * Column 안에 ListView가 들어가면 사이즈 에러가 남
+ * ListView에 높이를 정해야 함
+ * 스크롤을 하는데, Scroll하는 영역을 무제한으로 정하면 안 되기 때문이다.
+ * ListView에서 스크롤 방향을 바꿔서 메뉴를 만들 수도 있다.
+ * onDeleted를 넣으면, 자동으로 아이콘이 생긴다.
+ * map 함수는 인덱스를 생성하지 않는다. asMap 등을 사용해야 한다.
+ * builder는 인덱스를 생성한다. 때문에 인덱스를 사용할 때에는 ListView나 그런 것들의 builder를 사용해주는 것이 좋다.
+ * 위젯 하나 당 하나의 파일을 만드는 것이 유지보수에 좋다.
+ *
+ */

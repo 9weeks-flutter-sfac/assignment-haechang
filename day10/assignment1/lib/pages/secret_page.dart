@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:secret_cat_sdk/secret_cat_sdk.dart';
@@ -30,7 +31,8 @@ class SecretPage extends StatelessWidget {
           backgroundColor: Colors.transparent,
         ),
         body: FutureBuilder(
-          future: SecretCatApi.fetchSecrets(),
+          future: Future.delayed(
+              Duration(seconds: 1), () => SecretCatApi.fetchSecrets()),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return Center(
@@ -66,7 +68,12 @@ class SecretPage extends StatelessWidget {
                 ),
               );
             }
-            return CircularProgressIndicator();
+            return Center(
+              child: Dance(
+                infinite: true,
+                child: Image.asset('assets/black-cat_1.png'),
+              ),
+            );
           },
         ),
       ),

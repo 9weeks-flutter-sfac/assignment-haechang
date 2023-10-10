@@ -41,7 +41,7 @@ class UploadPage extends StatelessWidget {
           );
         },
       );
-    }
+    } // 함수 선언을 async 내에 하면 안 되는 이유?
 
     return Container(
       decoration: BoxDecoration(
@@ -102,9 +102,11 @@ class UploadPage extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () async {
-                    await SecretCatApi.addSecret(secretController.text);
-                    secretController.text = '';
-                    localDialog();
+                    if (secretController.text != '') {
+                      await SecretCatApi.addSecret(secretController.text);
+                      secretController.text = '';
+                      localDialog();
+                    } else {}
                   },
                   child: Text(
                     '저장하기',
