@@ -11,7 +11,8 @@ class MainController extends GetxController {
   var authController = Get.find<AuthController>();
 
   RxInt curPage = 0.obs;
-  List<Document>? document;
+  RxList<Document> document = RxList<Document>();
+  RxBool check = RxBool(false);
 
   onPageTapped(int v) {
     pageController.jumpToPage(v);
@@ -30,8 +31,9 @@ class MainController extends GetxController {
       'http://52.79.115.43:8090/api/collections/documents/records',
       options: Options(headers: headers),
     );
-    document = (res.data["items"] as List<dynamic>)
+    document = RxList((res.data["items"] as List<dynamic>)
         .map((e) => Document.fromMap(e))
-        .toList();
+        .toList());
+    check(true);
   }
 }

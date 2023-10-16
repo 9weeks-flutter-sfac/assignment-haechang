@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
         Get.lazyPut(() => MainController());
       }),
       getPages: [
-        GetPage(name: LoginPage.route, page: () => LoginPage()),
-        GetPage(name: MainPage.route, page: () => MainPage()),
+        GetPage(name: LoginPage.route, page: () => const LoginPage()),
+        GetPage(name: MainPage.route, page: () => const MainPage()),
       ],
       home: Scaffold(
         body: Center(

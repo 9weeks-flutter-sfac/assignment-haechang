@@ -10,42 +10,65 @@ class MainPage extends GetView<MainController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: PageView(
-          controller: controller.pageController,
-          children: [
-            Column(
-              children: [
-                Text(controller.document?[0].title ?? 'null'),
-                Text(controller.document?[1].title ?? 'null'),
-                Text(controller.document?[2].title ?? 'null'),
-                Text(controller.document?[3].title ?? 'null'),
-                Image.network(controller.document?[3].attachment_url ?? '')
-              ],
-            ), // 여기에 첫 번째 페이지 위젯을 넣으세요
-            Container(
-              child: Text('b'),
-              width: 300,
-              height: 300,
-            ), // 여기에 두 번째 페이지 위젯을 넣으세요
-          ],
+    return Obx(
+      () => Scaffold(
+        body: SafeArea(
+          child: PageView(
+            controller: controller.pageController,
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  children: controller.check == RxBool(true)
+                      ? [
+                          Text(
+                            '안녕하세요! ${controller.authController.user!.record.name}입니다.',
+                            style: const TextStyle(fontSize: 36),
+                          ),
+                          SizedBox(
+                            height: 300,
+                            child: ListView.builder(
+                              itemCount: controller.document.length,
+                              itemBuilder: (context, index) => Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      controller.document[index].title,
+                                      style: const TextStyle(fontSize: 18),
+                                    ),
+                                  ),
+                                  Text(controller.document[index].content),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Image.network(
+                              controller.document[3].attachment_url as String),
+                        ]
+                      : [const Text('')],
+                ),
+              ),
+              const SizedBox(
+                width: 300,
+                height: 300,
+                child: Text('b'),
+              ),
+            ],
+          ),
         ),
-      ),
-      bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
+        bottomNavigationBar: BottomNavigationBar(
           currentIndex: controller.curPage.value,
           onTap: controller.onPageTapped,
-          items: [
+          items: const [
             BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'Home'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.access_alarm), label: 'My'),
           ],
         ),
+        floatingActionButton: FloatingActionButton(onPressed: () {
+          controller.readDocuments();
+        }),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        controller.readDocuments();
-      }),
     );
   }
 }
