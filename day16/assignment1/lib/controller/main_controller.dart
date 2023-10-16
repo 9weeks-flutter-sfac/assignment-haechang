@@ -11,7 +11,7 @@ class MainController extends GetxController {
   var authController = Get.find<AuthController>();
 
   RxInt curPage = 0.obs;
-  RxList<Document> document = RxList<Document>();
+  RxList<Document>? document;
   RxBool check = RxBool(false);
 
   onPageTapped(int v) {
@@ -20,7 +20,8 @@ class MainController extends GetxController {
   }
 
   logout() {
-    Get.toNamed(ApiRoutes.login);
+    authController.logout();
+    Get.offAndToNamed(ApiRoutes.login);
   }
 
   readDocuments() async {

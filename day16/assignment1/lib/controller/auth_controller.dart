@@ -28,11 +28,11 @@ class AuthController extends GetxController {
       if (res.statusCode == 200) {
         _user(User.fromMap(res.data));
         token = user!.token;
-        Get.toNamed(ApiRoutes.main);
+        Get.offAndToNamed(ApiRoutes.main);
       }
     } catch (e) {
       print(e);
-      Get.toNamed(ApiRoutes.login);
+      Get.offAndToNamed(ApiRoutes.login);
     }
   }
 

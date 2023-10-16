@@ -5,69 +5,95 @@ import '../controller/main_controller.dart';
 
 class MainPage extends GetView<MainController> {
   const MainPage({super.key});
-
   static const String route = '/main';
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Scaffold(
-        body: SafeArea(
-          child: PageView(
-            controller: controller.pageController,
-            children: [
-              SingleChildScrollView(
-                child: Column(
-                  children: controller.check == RxBool(true)
-                      ? [
-                          Text(
-                            '안녕하세요! ${controller.authController.user!.record.name}입니다.',
-                            style: const TextStyle(fontSize: 36),
-                          ),
-                          SizedBox(
-                            height: 300,
-                            child: ListView.builder(
-                              itemCount: controller.document.length,
-                              itemBuilder: (context, index) => Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      controller.document[index].title,
-                                      style: const TextStyle(fontSize: 18),
-                                    ),
-                                  ),
-                                  Text(controller.document[index].content),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Image.network(
-                              controller.document[3].attachment_url as String),
-                        ]
-                      : [const Text('')],
-                ),
-              ),
-              const SizedBox(
-                width: 300,
-                height: 300,
-                child: Text('b'),
-              ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
+    return Scaffold(
+      bottomNavigationBar: Obx(
+        () => BottomNavigationBar(
           currentIndex: controller.curPage.value,
           onTap: controller.onPageTapped,
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'Home'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.access_alarm), label: 'My'),
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'My'),
           ],
         ),
-        floatingActionButton: FloatingActionButton(onPressed: () {
-          controller.readDocuments();
-        }),
+      ),
+      body: SafeArea(
+        child: PageView(
+          controller: controller.pageController,
+          children: [
+            Obx(
+              () => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${controller.authController.user?.record.username}님 안녕하세요',
+                    style: TextStyle(fontSize: 32),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  controller.check == RxBool(true)
+                      ? Expanded(
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 300,
+                                child: ListView.builder(
+                                  itemBuilder: (context, index) => Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          controller.document?[index].title ??
+                                              '',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8.0),
+                                        child: Text(controller
+                                                .document?[index].content ??
+                                            ''),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                    ],
+                                  ),
+                                  itemCount: controller.document?.length ?? 0,
+                                ),
+                              ),
+                              Container(
+                                height: 250,
+                                child: Image.network(
+                                    '${controller.document![3].attachment_url}'),
+                              )
+                            ],
+                          ),
+                        )
+                      : SizedBox.shrink()
+                ],
+              ),
+            ),
+            Center(
+              child: ElevatedButton(
+                  onPressed: () {
+                    controller.authController.logout();
+                  },
+                  child: Text('로그아웃')),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: controller.readDocuments,
+        child: const Icon(Icons.refresh),
       ),
     );
   }
