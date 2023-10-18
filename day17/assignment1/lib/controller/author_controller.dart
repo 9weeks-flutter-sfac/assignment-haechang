@@ -15,10 +15,9 @@ class AuthorController extends GetxController {
         userList = RxList((res.data["items"] as List<dynamic>)
             .map((e) => Record.fromMap(e))
             .toList());
-        print(userList.runtimeType);
       }
     } catch (e) {
-      print(e);
+      printError();
     }
   }
 

@@ -8,6 +8,7 @@ class AuthController extends GetxController {
   final Rxn<User> _user = Rxn();
   Dio dio = Dio();
   RxBool delay = RxBool(false);
+  var token;
 
   _handleAuthChanged(User? data) async {
     if (data != null) {
@@ -15,7 +16,9 @@ class AuthController extends GetxController {
       await Future.delayed(const Duration(seconds: 1));
       delay.value = true;
     } else {
-      Get.offAndToNamed(AppRoutes.first);
+      delay.value = false;
+      Get.offAndToNamed(
+          AppRoutes.first); // offAndToNamed는 현재 페이지를 스택에서 제거하고 전 페이지로 이동하는 것.
     }
   } // 앱을 켰을 때 로그인 되어 있으면 바로 메인으로, 아니면 로그인 화면으로 보내는 함수, onInit에 넣는다.
 
@@ -28,6 +31,7 @@ class AuthController extends GetxController {
       if (res.statusCode == 200) {
         print('로그인 성공!');
         _user(User.fromMap(res.data));
+        token = _user.value!.token;
       }
     } catch (e) {
       Get.snackbar('아이디 또는 비밀번호를 잘못 입력했습니다.', '입력하신 내용을 다시 확인해주세요');
@@ -52,8 +56,8 @@ class AuthController extends GetxController {
   }
 
   logout() {
+    token = null;
     _user.value = null;
-    // offAndToNamed는 현재 페이지를 스택에서 제거하고 전 페이지로 이동하는 것.
   }
 
   @override

@@ -9,9 +9,19 @@ class UploadController extends GetxController {
   var authorNameController = TextEditingController();
 
   RxString secret = ''.obs;
+  RxString author = ''.obs;
+  RxString authorName = ''.obs;
 
   void setSecret(String value) {
     secret.value = value;
+  }
+
+  void setAuthor(String value) {
+    author.value = value;
+  }
+
+  void setAuthorName(String value) {
+    authorName.value = value;
   }
 
   RxBool get secretConfirm => RxBool(secret.value != '');

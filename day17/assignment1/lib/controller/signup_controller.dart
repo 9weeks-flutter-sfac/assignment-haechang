@@ -10,6 +10,7 @@ class SignupController extends GetxController {
   RxString email = ''.obs;
   RxString password = ''.obs;
   RxString password2 = ''.obs;
+  RxString username = ''.obs;
 
   void setEmail(String value) {
     email.value = value;
@@ -21,6 +22,10 @@ class SignupController extends GetxController {
 
   void setConfirmPassword(String value) {
     password2.value = value;
+  }
+
+  void setName(String value) {
+    username.value = value;
   }
 
   RxBool get emailConfirm => RxBool(

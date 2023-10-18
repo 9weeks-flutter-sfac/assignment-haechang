@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-import 'package:assignment1/controller/auth_controller.dart';
 import 'package:assignment1/controller/login_controller.dart';
 import 'package:assignment1/util/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -8,12 +7,6 @@ import 'package:get/get.dart';
 class FirstPage extends GetView<LoginController> {
   const FirstPage({super.key});
   static const String route = '/first';
-
-  void getfunction() async {
-    var res = await Get.find<AuthController>().dio.get(
-        'http://52.79.115.43:8090/api/collections/users/records?sort=-created');
-    print(res);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,8 +60,24 @@ class FirstPage extends GetView<LoginController> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextField(
+                          onChanged: controller.setId,
                           controller: controller.idController,
                           decoration: InputDecoration(
+                              suffixIcon: controller.id.value != ''
+                                  ? IconButton(
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Colors.blue),
+                                      ),
+                                      onPressed: () {
+                                        controller.idController.clear();
+                                      },
+                                      icon: Icon(
+                                        Icons.clear,
+                                      ),
+                                    )
+                                  : null,
                               icon: Icon(Icons.person),
                               labelText: '아이디',
                               labelStyle:
@@ -85,6 +94,21 @@ class FirstPage extends GetView<LoginController> {
                                 controller: controller.pwController,
                                 obscureText: true,
                                 decoration: InputDecoration(
+                                  suffixIcon: controller.password.value != ''
+                                      ? IconButton(
+                                          style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all<
+                                                    Color>(Colors.blue),
+                                          ),
+                                          onPressed: () {
+                                            controller.pwController.clear();
+                                          },
+                                          icon: Icon(
+                                            Icons.clear,
+                                          ),
+                                        )
+                                      : null,
                                   errorText: (controller
                                                   .passwordConfirm.value ==
                                               true) || // 비밀번호가 9자 이상이거나, 처음에 비어있을 때는 null
@@ -131,7 +155,7 @@ class FirstPage extends GetView<LoginController> {
               TextButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(
-                    Color.fromRGBO(100, 72, 200, 0.7),
+                    Color.fromRGBO(100, 72, 200, 0.5),
                   ),
                 ),
                 onPressed: () {

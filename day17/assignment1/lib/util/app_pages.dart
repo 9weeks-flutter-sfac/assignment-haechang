@@ -9,11 +9,11 @@ import 'app_routes.dart';
 
 class AppPages {
   static final pages = [
-    GetPage(name: AppRoutes.author, page: () => AuthorPage()),
-    GetPage(name: AppRoutes.first, page: () => FirstPage()),
-    GetPage(name: AppRoutes.main, page: () => MainPage()),
-    GetPage(name: AppRoutes.secret, page: () => SecretPage()),
-    GetPage(name: AppRoutes.signUp, page: () => SignUpPage()),
+    GetPage(name: AppRoutes.author, page: () => const AuthorPage()),
+    GetPage(name: AppRoutes.first, page: () => const FirstPage()),
+    GetPage(name: AppRoutes.main, page: () => const MainPage()),
+    GetPage(name: AppRoutes.secret, page: () => const SecretPage()),
+    GetPage(name: AppRoutes.signUp, page: () => const SignUpPage()),
     GetPage(name: AppRoutes.upload, page: () => UploadPage()),
   ];
 }

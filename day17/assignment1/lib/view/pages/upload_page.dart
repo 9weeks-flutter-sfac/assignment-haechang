@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 // ignore_for_file: prefer_const_constructors
 
 class UploadPage extends GetView<UploadController> {
-  UploadPage({super.key});
+  const UploadPage({super.key});
   static const String route = '/upload';
 
   @override
@@ -24,7 +24,9 @@ class UploadPage extends GetView<UploadController> {
               child: Center(
                 child: Text(
                   '비밀 저장 완료',
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ),
@@ -79,26 +81,42 @@ class UploadPage extends GetView<UploadController> {
                   child: Text(
                     '본인의 비밀:',
                     style:
-                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 12),
                   padding: const EdgeInsets.all(16.0),
-                  child: TextField(
-                    onChanged: controller.setSecret,
-                    controller: controller.secretController,
-                    maxLines: null,
-                    decoration: InputDecoration(
-                      hintText: '비밀을 입력하세요',
-                      border: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 166, 49, 198),
+                  child: Obx(
+                    () => TextField(
+                      onChanged: controller.setSecret,
+                      controller: controller.secretController,
+                      maxLines: null,
+                      decoration: InputDecoration(
+                        suffixIcon: controller.secret.value != ''
+                            ? IconButton(
+                                onPressed: () {
+                                  controller.secretController.text = '';
+                                  controller.secret.value = '';
+                                },
+                                iconSize: 16,
+                                icon: Icon(
+                                  Icons.clear,
+                                  color: Colors.black,
+                                ),
+                              )
+                            : null,
+                        hintText: '비밀을 입력하세요',
+                        hintStyle: TextStyle(fontWeight: FontWeight.bold),
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 166, 49, 198),
+                          ),
                         ),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 166, 49, 198),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 166, 49, 198),
+                          ),
                         ),
                       ),
                     ),
@@ -107,20 +125,37 @@ class UploadPage extends GetView<UploadController> {
                 Container(
                   margin: EdgeInsets.only(top: 12),
                   padding: const EdgeInsets.all(16.0),
-                  child: TextField(
-                    controller: controller.authorController,
-                    maxLines: null,
-                    decoration: InputDecoration(
-                      hintText: '아이디를 입력하세요(선택)',
-                      hintStyle: TextStyle(fontSize: 12),
-                      border: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 166, 49, 198),
+                  child: Obx(
+                    () => TextField(
+                      onChanged: controller.setAuthor,
+                      controller: controller.authorController,
+                      maxLines: null,
+                      decoration: InputDecoration(
+                        suffixIcon: controller.author.value != ''
+                            ? IconButton(
+                                onPressed: () {
+                                  controller.authorController.text = '';
+                                  controller.author.value = '';
+                                },
+                                iconSize: 16,
+                                icon: Icon(
+                                  Icons.clear,
+                                  color: Colors.black,
+                                ),
+                              )
+                            : null,
+                        hintText: '아이디를 입력하세요(선택)',
+                        hintStyle: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 166, 49, 198),
+                          ),
                         ),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 166, 49, 198),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 166, 49, 198),
+                          ),
                         ),
                       ),
                     ),
@@ -128,20 +163,37 @@ class UploadPage extends GetView<UploadController> {
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: TextField(
-                    controller: controller.authorNameController,
-                    maxLines: null,
-                    decoration: InputDecoration(
-                      hintText: '이름을 입력하세요(선택)',
-                      hintStyle: TextStyle(fontSize: 12),
-                      border: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 166, 49, 198),
+                  child: Obx(
+                    () => TextField(
+                      onChanged: controller.setAuthorName,
+                      controller: controller.authorNameController,
+                      maxLines: null,
+                      decoration: InputDecoration(
+                        suffixIcon: controller.authorName.value != ''
+                            ? IconButton(
+                                onPressed: () {
+                                  controller.authorNameController.text = '';
+                                  controller.authorName.value = '';
+                                },
+                                iconSize: 16,
+                                icon: Icon(
+                                  Icons.clear,
+                                  color: Colors.black,
+                                ),
+                              )
+                            : null,
+                        hintText: '이름을 입력하세요(선택)',
+                        hintStyle: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 166, 49, 198),
+                          ),
                         ),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 166, 49, 198),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 166, 49, 198),
+                          ),
                         ),
                       ),
                     ),

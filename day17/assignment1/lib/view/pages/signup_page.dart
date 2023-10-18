@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:assignment1/controller/auth_controller.dart';
 import 'package:assignment1/controller/signUp_controller.dart';
+import 'package:assignment1/util/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -32,10 +33,15 @@ class SignUpPage extends GetView<SignupController> {
         backgroundColor: Colors.transparent,
         body: Center(
           child: Container(
-            decoration: BoxDecoration(color: Colors.white),
+            margin: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(8)),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                SizedBox(
+                  height: 24,
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Obx(
@@ -43,6 +49,19 @@ class SignUpPage extends GetView<SignupController> {
                       onChanged: controller.setEmail,
                       controller: controller.emailController,
                       decoration: InputDecoration(
+                          suffixIcon: controller.email.value != ''
+                              ? IconButton(
+                                  onPressed: () {
+                                    controller.emailController.text =
+                                        ''; // TextEditingController에 있는 clear()를 사용하면 value가 ''가 되는 게 아니라 다른 게 되어서 confirm이 작동하지 않는다.
+                                    controller.email.value =
+                                        ''; // Rx값인 password의 value에 넣어주기 까지 해야 작동한다.
+                                  },
+                                  icon: Icon(
+                                    Icons.clear,
+                                  ),
+                                )
+                              : null,
                           errorText: (controller.emailConfirm.value ==
                                       true) || // 이메일 형식이 아닐 때이거나, 처음에 비어있을 때는 null
                                   controller.email.value == ''
@@ -61,6 +80,19 @@ class SignUpPage extends GetView<SignupController> {
                       onChanged: controller.setPassword,
                       controller: controller.pwController,
                       decoration: InputDecoration(
+                          suffixIcon: controller.password.value != ''
+                              ? IconButton(
+                                  onPressed: () {
+                                    controller.pwController.text =
+                                        ''; // TextEditingController에 있는 clear()를 사용하면 value가 ''가 되는 게 아니라 다른 게 되어서 confirm이 작동하지 않는다.
+                                    controller.password.value =
+                                        ''; // Rx값인 password의 value에 넣어주기 까지 해야 작동한다.
+                                  },
+                                  icon: Icon(
+                                    Icons.clear,
+                                  ),
+                                )
+                              : null,
                           errorText: (controller.passwordConfirm.value ==
                                       true) || // 비밀번호가 9자 이상이거나, 처음에 비어있을 때는 null
                                   (controller.password.value == '')
@@ -79,6 +111,18 @@ class SignUpPage extends GetView<SignupController> {
                       onChanged: controller.setConfirmPassword,
                       controller: controller.pwController2,
                       decoration: InputDecoration(
+                          suffixIcon: controller.password2.value != ''
+                              ? IconButton(
+                                  onPressed: () {
+                                    controller.pwController2.text =
+                                        ''; // TextEditingController에 있는 clear()를 사용하면 value가 ''가 되는 게 아니라 다른 게 되어서 confirm이 작동하지 않는다.
+                                    controller.password2.value = '';
+                                  },
+                                  icon: Icon(
+                                    Icons.clear,
+                                  ),
+                                )
+                              : null,
                           errorText: controller.passwordMatchConfirm.value ==
                                       true ||
                                   controller.password2.value ==
@@ -91,14 +135,29 @@ class SignUpPage extends GetView<SignupController> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: controller.usernameController,
-                    decoration: InputDecoration(
-                        icon: Icon(Icons.badge),
-                        labelText: '이름',
-                        labelStyle: TextStyle(fontWeight: FontWeight.bold)),
+                Obx(
+                  () => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      onChanged: controller.setName,
+                      controller: controller.usernameController,
+                      decoration: InputDecoration(
+                          suffixIcon: controller.username.value != ''
+                              ? IconButton(
+                                  onPressed: () {
+                                    controller.usernameController.text =
+                                        ''; // TextEditingController에 있는 clear()를 사용하면 value가 ''가 되는 게 아니라 다른 게 되어서 confirm이 작동하지 않는다.
+                                    controller.username.value = '';
+                                  },
+                                  icon: Icon(
+                                    Icons.clear,
+                                  ),
+                                )
+                              : null,
+                          icon: Icon(Icons.badge),
+                          labelText: '이름',
+                          labelStyle: TextStyle(fontWeight: FontWeight.bold)),
+                    ),
                   ),
                 ),
                 Obx(

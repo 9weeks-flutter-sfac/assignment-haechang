@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         Get.put(AuthController());
         Get.lazyPut(() => LoginController(),
             fenix:
-                true); // fenix를 true로 하면 GetX 컨트롤러가 캐시에서 제거되어도, 다시 필요한 경우 컨트롤러를 다시 생성할 수 있다.
+                true); // fenix를 true로 하면 GetX 컨트롤러가 캐시에서 제거되어도 다시 필요한 경우 컨트롤러를 다시 생성할 수 있다.
         Get.lazyPut(() => SignupController(), fenix: true);
         Get.lazyPut(() => MainController(), fenix: true);
         Get.lazyPut(() => AuthorController(), fenix: true);

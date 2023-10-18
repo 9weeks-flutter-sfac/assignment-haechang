@@ -7,11 +7,16 @@ class LoginController extends GetxController {
   var pwController = TextEditingController();
 
   RxString password = ''.obs;
+  RxString id = ''.obs;
 
   login() {
     Get.find<AuthController>().login(idController.text, pwController.text);
     idController.text = '';
     pwController.text = '';
+  }
+
+  void setId(String value) {
+    id.value = value;
   }
 
   void setPassword(String value) {
