@@ -23,5 +23,9 @@ class LoginController extends GetxController {
     password.value = value;
   }
 
+  googleLogin() {
+    Get.find<AuthController>().signInWithGoogle();
+  }
+
   RxBool get passwordConfirm => RxBool(password.value.length >= 9);
 }

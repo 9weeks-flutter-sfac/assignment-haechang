@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:assignment1/controller/auth_controller.dart';
 import 'package:assignment1/controller/signUp_controller.dart';
-import 'package:assignment1/util/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

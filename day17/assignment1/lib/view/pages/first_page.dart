@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors
 import 'package:assignment1/controller/login_controller.dart';
 import 'package:assignment1/util/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,8 @@ class FirstPage extends GetView<LoginController> {
           colorFilter:
               ColorFilter.mode(Colors.grey.withOpacity(0.5), BlendMode.color),
           fit: BoxFit.cover,
-          image: AssetImage('assets/anita-austvika-LTw2ld-5q4M-unsplash.jpg'),
+          image: const AssetImage(
+              'assets/anita-austvika-LTw2ld-5q4M-unsplash.jpg'),
         ),
       ),
       child: Scaffold(
@@ -31,9 +31,9 @@ class FirstPage extends GetView<LoginController> {
                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 25),
                 height: Get.height * 0.1,
                 decoration: BoxDecoration(
-                    color: Color.fromRGBO(100, 72, 200, 0.3),
+                    color: const Color.fromRGBO(100, 72, 200, 0.3),
                     borderRadius: BorderRadius.circular(16)),
-                child: Center(
+                child: const Center(
                   child: Text(
                     '비밀?',
                     style: TextStyle(
@@ -53,8 +53,8 @@ class FirstPage extends GetView<LoginController> {
                 child: Obx(
                   () => Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Text('로그인'),
                       ),
                       Padding(
@@ -73,15 +73,15 @@ class FirstPage extends GetView<LoginController> {
                                       onPressed: () {
                                         controller.idController.clear();
                                       },
-                                      icon: Icon(
+                                      icon: const Icon(
                                         Icons.clear,
                                       ),
                                     )
                                   : null,
-                              icon: Icon(Icons.person),
+                              icon: const Icon(Icons.person),
                               labelText: '아이디',
                               labelStyle:
-                                  TextStyle(fontWeight: FontWeight.bold)),
+                                  const TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ),
                       Padding(
@@ -104,7 +104,7 @@ class FirstPage extends GetView<LoginController> {
                                           onPressed: () {
                                             controller.pwController.clear();
                                           },
-                                          icon: Icon(
+                                          icon: const Icon(
                                             Icons.clear,
                                           ),
                                         )
@@ -115,10 +115,10 @@ class FirstPage extends GetView<LoginController> {
                                           (controller.password.value == '')
                                       ? null
                                       : '비밀번호는 9자 이상이어야 합니다',
-                                  icon: Icon(Icons.security),
+                                  icon: const Icon(Icons.security),
                                   labelText: '비밀번호',
-                                  labelStyle:
-                                      TextStyle(fontWeight: FontWeight.bold),
+                                  labelStyle: const TextStyle(
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ),
@@ -127,19 +127,19 @@ class FirstPage extends GetView<LoginController> {
                       ),
                       controller.passwordConfirm.value == true
                           ? Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
                               child: ElevatedButton(
                                 onPressed: () {
                                   controller.login();
                                 },
-                                child: Text(
+                                child: const Text(
                                   '로그인',
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ),
                             )
-                          : Padding(
-                              padding: const EdgeInsets.all(8.0),
+                          : const Padding(
+                              padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
                               child: ElevatedButton(
                                 onPressed: null,
                                 child: Text(
@@ -148,12 +148,21 @@ class FirstPage extends GetView<LoginController> {
                                 ),
                               ),
                             ),
+                      TextButton(
+                        child: const Text(
+                          'Google로 로그인하기',
+                          style: TextStyle(color: Colors.black, fontSize: 12),
+                        ),
+                        onPressed: () {
+                          controller.googleLogin();
+                        },
+                      ),
                     ],
                   ),
                 ),
               ),
               TextButton(
-                style: ButtonStyle(
+                style: const ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(
                     Color.fromRGBO(100, 72, 200, 0.5),
                   ),
@@ -161,7 +170,7 @@ class FirstPage extends GetView<LoginController> {
                 onPressed: () {
                   Get.toNamed(AppRoutes.signUp);
                 },
-                child: Text(
+                child: const Text(
                   '회원가입',
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),

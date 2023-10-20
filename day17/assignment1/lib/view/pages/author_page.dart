@@ -53,7 +53,14 @@ class AuthorPage extends StatelessWidget {
                   itemBuilder: (context, index) => BounceInDown(
                     delay: Duration(milliseconds: index * 100),
                     child: Card(
-                      child: Center(child: Text('${list[index].username}')),
+                      color: Color.fromRGBO(100, 72, 200, 0.6),
+                      margin: const EdgeInsets.all(8),
+                      child: Center(
+                          child: Text(
+                        '${list[index].username}',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      )),
                     ),
                   ),
                 ),

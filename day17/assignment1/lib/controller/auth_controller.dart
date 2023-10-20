@@ -1,16 +1,18 @@
-import 'package:assignment1/model/user.dart';
+import 'package:assignment1/model/user.dart' as my_user;
 import 'package:assignment1/util/api_routes.dart';
 import 'package:assignment1/util/app_routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthController extends GetxController {
-  final Rxn<User> _user = Rxn();
+  final Rxn<my_user.User> _user = Rxn();
   Dio dio = Dio();
   RxBool delay = RxBool(false);
   var token;
 
-  _handleAuthChanged(User? data) async {
+  _handleAuthChanged(my_user.User? data) async {
     if (data != null) {
       Get.offAndToNamed(AppRoutes.main); // 로그인하면 스택에 쌓인 first 페이지는 삭제한다.
       await Future.delayed(const Duration(seconds: 1));
@@ -30,7 +32,7 @@ class AuthController extends GetxController {
       );
       if (res.statusCode == 200) {
         print('로그인 성공!');
-        _user(User.fromMap(res.data));
+        _user(my_user.User.fromMap(res.data));
         token = _user.value!.token;
       }
     } catch (e) {
@@ -60,10 +62,45 @@ class AuthController extends GetxController {
     _user.value = null;
   }
 
+  signOutWithGoogle() {
+    token = null;
+    FirebaseAuth.instance.signOut();
+  }
+
+  Future<UserCredential> signInWithGoogle() async {
+    token = 'a';
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
+
     ever(_user, _handleAuthChanged);
+
+    FirebaseAuth.instance.authStateChanges().listen((event) async {
+      if (event != null) {
+        Get.offAndToNamed(AppRoutes.main);
+        await Future.delayed(const Duration(seconds: 1));
+        delay.value = true;
+      } else {
+        delay.value = false;
+        Get.offAndToNamed(AppRoutes.first);
+      }
+    });
   }
 }
